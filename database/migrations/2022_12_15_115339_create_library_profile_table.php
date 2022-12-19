@@ -17,7 +17,7 @@ class CreateLibraryProfileTable extends Migration
             $table->id();
             $table->text("mission")->nullable();
             $table->text("vision")->nullable();
-            $table->text("core_value")->nullable();
+            $table->text("rules_regulation")->nullable();
             $table->text("school_history")->nullable();
             $table->timestamps();
         });

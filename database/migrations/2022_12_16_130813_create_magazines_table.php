@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLibraryProgramServicesTable extends Migration
+class CreateMagazinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateLibraryProgramServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('library_program_services', function (Blueprint $table) {
+        Schema::create('magazines', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('description')->nullable();
+            $table->text("magazine_title")->nullable();
+            $table->text("date_issued")->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateLibraryProgramServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('library_program_services');
+        Schema::dropIfExists('magazines');
     }
 }

@@ -5,6 +5,18 @@ import Login from '../page/Login';
 import Admin from '../admin/AdminMain';
 import AdminLibProfile from '../admin/AdminLibProfile';
 import Collection from '../admin/AdminCollection';
+import Books from '../admin/AdminBooks';
+import Journals from '../admin/AdminJournals';
+import Magazines from '../admin/AdminMagazine';
+import Gallery from '../admin/AdminGallery';
+import Linkage from '../admin/AdminLinkage';
+import Services from '../admin/AdminService';
+import Faculty from '../admin/AdminFaculty';
+import User from '../admin/AdminUser';
+
+import UserMain from '../user/Dashboard';
+import UserProfile from '../user/UserProfile';
+import UserHome from '../user/Home';
 
 
 export const routes = [
@@ -26,19 +38,78 @@ export const routes = [
         component: Login
     },
     {
+        name: 'user',
+        path: '/user',
+        component: UserMain,
+        children:[
+            {
+                name: 'userprofile',
+                path: 'profile',
+                component: UserProfile
+            },
+            {
+                name: 'userhome',
+                path: '',
+                component: UserHome
+            },
+        ]
+    },
+    {
         name: 'admin',
         path: '/admin',
         component: Admin,
         children:[
             {
                 name: 'adminlibprofile',
-                path: 'lib-profile',
+                path: '',
                 component: AdminLibProfile
             },
             {
                 name: 'admincollection',
                 path: 'lib-resource-collection',
-                component: Collection
+                component: Collection,
+                children:[
+                    {
+                        name: 'books',
+                        path: 'books',
+                        component: Books
+                    },
+                    {
+                        name: 'journals',
+                        path: 'journals',
+                        component: Journals
+                    },
+                    {
+                        name: 'magazines',
+                        path: 'magazines',
+                        component: Magazines
+                    },
+                ]
+            },
+            {
+                name: 'admingallery',
+                path: 'gallery',
+                component: Gallery
+            },
+            {
+                name: 'adminservices',
+                path: 'services',
+                component: Services
+            },
+            {
+                name: 'adminlinkage',
+                path: 'linkages',
+                component: Linkage
+            },
+            {
+                name: 'adminfaculty',
+                path: 'faculty',
+                component: Faculty
+            },
+            {
+                name: 'adminuser',
+                path: 'user',
+                component: User
             },
         ]
     }
@@ -55,19 +126,29 @@ const openRoutes = [
      'home',
      'register',
      'login',
-     'admin',
-     'adminlibprofile',
-     'admincollection',
+     
 
 ];
 
 const userRoutes = [
-    'home',
+    'user',
+    'userprofile',
+    'userhome'
    
    
 ];
 const adminRoutes = [
-   
+    'admin',
+    'adminlibprofile',
+    'admincollection',
+    'books',
+    'journals',
+    'magazines',
+    'admingallery',
+    'adminlinkage',
+    'adminservices',
+    'adminfaculty',
+    'adminuser',
     
 ];
 
@@ -79,9 +160,9 @@ router.beforeEach((to, from, next)=>{
         }
     }else{
         let user = window.Laravel.user;
-        if(adminRoutes.includes(to.name) && user.role == 1){
+        if(adminRoutes.includes(to.name) && user.role == 2){
             return next();
-        }else if(userRoutes.includes(to.name) && user.role == 0){
+        }else if(userRoutes.includes(to.name) && user.role == 1){
             return next();
         }
     }

@@ -8,7 +8,7 @@
     <title>{{env('MIX_APP_NAME')}}</title>
 
  
-    <link href="{{ asset(url('vendor/fontawesome-free/css/all.min.css') ) }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset(url('vendor/fontawesome-free/css/all.min.css')) }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -18,13 +18,12 @@
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
 </head>
 
-<body class="app" id="page-top">
+<body class="app bg-gradient-primary-mode" id="page-top">
 @if (Auth::check())
     @php
     $user_auth_data = [
         'isLoggedin' => true,
         'user' =>  Auth::user(),
-        'shipping_address'=>Auth::user()->shipping_address()->first()
     ];
     @endphp
 @else

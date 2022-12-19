@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLinkagesTable extends Migration
+class CreateJournalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateLinkagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('linkages', function (Blueprint $table) {
+        Schema::create('journals', function (Blueprint $table) {
             $table->id();
-            $table->string("name")->nullable();
-            $table->string("position")->nullable();
-            $table->string("school")->nullable();
-            $table->string("address")->nullable();
+            $table->text("journal_title")->nullable();
+            $table->string("volume")->nullable();
+            $table->date("date_issued")->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateLinkagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('linkages');
+        Schema::dropIfExists('journals');
     }
 }
