@@ -5,7 +5,7 @@
 }
 
 .navbar-sidebar .navbar__list li > a.router-link-active {
-    color: #4272d7 !important;
+    color: #ececec !important;
 }
 
 .fm-body {
@@ -57,9 +57,10 @@
     background-position: center;
     background-size: cover;
 }
-
-.router-link-exact-active span{
-    color: #eb55eb !important;
-    font-weight:bold;
-    
+.user{
+    .router-link-exact-active span{
+        color: #eb55eb !important;
+        font-weight:bold;
+        
+    }
 }

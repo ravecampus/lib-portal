@@ -141,4 +141,33 @@ class UserController extends Controller
         $user->save();
         return response()->json($user, 200);
     }
+
+    public function reportUser(Request $request){
+
+        $columns = ['first_name','last_name','contact_number','created_at'];
+        $length = $request->length;
+        $column = $request->column;
+        $dir = $request->dir;
+        $filter = $request->filter;
+        $searchValue = $request->search;
+        
+        if(is_null($filter)){
+            $query = User::where("role","!=", 2)->orderBy($columns[$column], $dir);
+
+        }else{
+            $query = User::where("role","!=", 2)->where('role', $filter)->orderBy($columns[$column], $dir);
+
+        }
+       
+            
+        if($searchValue){
+            $query->where(function($query) use ($searchValue){
+                $query->where('first_name', 'like', '%'.$searchValue.'%')
+                ->orWhere('last_name', 'like', '%'.$searchValue.'%');
+            });
+        }
+       
+        $projects = $query->paginate($length);
+        return ['data'=>$projects, 'draw'=> $request->draw];
+    }
 }

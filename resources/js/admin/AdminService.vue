@@ -17,7 +17,7 @@
                     <tbody v-for="(list, idx) in services" :key="idx">
                         <tr class="tr-shadow">
                             <td>
-                                <img class="img-thumbnail logo-sc" :src="list.image == null ? '../img/logo.png' :'../storage/gallery/'+list.image" />
+                                <img class="img-thumbnail logo-sc" :src="list.image == null ? '../img/logo.png' :'../storage/service/'+list.image" />
                                     <div class="">
                                         <a href="#" @click="showUpload(list)" >Edit </a>
                                 </div>
@@ -124,7 +124,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="logo-view text-center">
-                                        <img class="logo-upload" :src="upload.image == null ? '../img/logo.png' :'../storage/gallery/'+upload.image">
+                                        <img class="logo-upload" :src="upload.image == null ? '../img/logo.png' :'../storage/service/'+upload.image">
                                         <!-- <a href="#" @click="resetLogo()">Reset Default</a> -->
                                     </div>
                                 </div>

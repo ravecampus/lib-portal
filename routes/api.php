@@ -13,6 +13,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,10 +45,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('service-upload', [ServiceController::class, 'serviceUpload']);
     Route::resource('faculty', FacultyController::class);
     Route::resource('user', UserController::class);
+    Route::resource('comment', CommentController::class);
     Route::post('user-account', [UserController::class,'setAccount']);
 
     Route::post('change-password', [AuthController::class,'changePassword']);
     Route::post('update-profile', [AuthController::class,'updateProfile']);
+    Route::get('report', [UserController::class,'reportUser']);
 });
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();

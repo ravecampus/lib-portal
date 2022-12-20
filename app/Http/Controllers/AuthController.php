@@ -22,6 +22,7 @@ class AuthController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
+            'role' => 0,
             'password' => bcrypt($request->password)
         ]);
 
@@ -82,6 +83,7 @@ class AuthController extends Controller
         $request->validate([
             'first_name' => 'required|string',
             'last_name' => 'required|string',
+            'role' => 'required',
             'contact_number' => 'required|regex:/(09)[0-9]{9}/',
             'email' => 'required|string|email|unique:users,email,'.Auth::id(),
         ]);
@@ -91,6 +93,7 @@ class AuthController extends Controller
         $user->last_name = $request->last_name;
         $user->contact_number = $request->contact_number;
         $user->grade_level = $request->grade_level;
+        $user->role = $request->role;
         $user->save();
 
         return response()->json($user, 200);

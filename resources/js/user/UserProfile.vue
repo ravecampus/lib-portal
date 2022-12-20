@@ -46,6 +46,14 @@
                     <input type="text" v-model="post.email" class="form-control form-control-user" placeholder="Enter Email Address">
                     <span class="errors-material" v-if="errors.email">{{errors.email[0]}}</span>
                 </div>
+                <div class="form-group">
+                        <label>Role</label>
+                        <select class="form-control" v-model="post.role">
+                            <option value="0">Student</option>
+                            <option value="1">Faculty</option>
+                        </select>
+                        <span class="errors-material" v-if="errors.role">{{errors.role[0]}}</span>
+                    </div>
                 <button type="button" @click="updateProfile()" class="btn btn-primary mt-3">Save</button>
             </div>
         </div>

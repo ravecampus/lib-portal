@@ -13,10 +13,18 @@ import Linkage from '../admin/AdminLinkage';
 import Services from '../admin/AdminService';
 import Faculty from '../admin/AdminFaculty';
 import User from '../admin/AdminUser';
+import Report from '../admin/AdminReport';
 
 import UserMain from '../user/Dashboard';
 import UserProfile from '../user/UserProfile';
 import UserHome from '../user/Home';
+import UserBook from '../user/UserBook';
+import UserJournal from '../user/UserJournal';
+import UserMagazine from '../user/UserMagazine';
+import UserLinkage from '../user/UserLinkage';
+import UserService from '../user/UserService';
+import UserGallery from '../user/UserGallery';
+import UserContact from '../user/UserContact';
 
 
 export const routes = [
@@ -51,6 +59,41 @@ export const routes = [
                 name: 'userhome',
                 path: '',
                 component: UserHome
+            },
+            {
+                name: 'userbook',
+                path: 'books',
+                component: UserBook
+            },
+            {
+                name: 'userjournal',
+                path: 'journal',
+                component: UserJournal
+            },
+            {
+                name: 'usermagazine',
+                path: 'magazine',
+                component: UserMagazine
+            },
+            {
+                name: 'userlinkage',
+                path: 'linkage',
+                component: UserLinkage
+            },
+            {
+                name: 'userservice',
+                path: 'service',
+                component: UserService
+            },
+            {
+                name: 'usergallery',
+                path: 'gallery',
+                component: UserGallery
+            },
+            {
+                name: 'usercontact',
+                path: 'contact',
+                component: UserContact
             },
         ]
     },
@@ -111,6 +154,11 @@ export const routes = [
                 path: 'user',
                 component: User
             },
+            {
+                name: 'adminreport',
+                path: 'report',
+                component: Report
+            },
         ]
     }
     
@@ -133,7 +181,14 @@ const openRoutes = [
 const userRoutes = [
     'user',
     'userprofile',
-    'userhome'
+    'userhome',
+    'userbook',
+    'userjournal',
+    'usermagazine',
+    'userlinkage',
+    'userservice',
+    'usergallery',
+    'usercontact',
    
    
 ];
@@ -149,6 +204,7 @@ const adminRoutes = [
     'adminservices',
     'adminfaculty',
     'adminuser',
+    'adminreport',
     
 ];
 
@@ -162,7 +218,7 @@ router.beforeEach((to, from, next)=>{
         let user = window.Laravel.user;
         if(adminRoutes.includes(to.name) && user.role == 2){
             return next();
-        }else if(userRoutes.includes(to.name) && user.role == 1){
+        }else if(userRoutes.includes(to.name) && (user.role == 1 || user.role == 0)){
             return next();
         }
     }

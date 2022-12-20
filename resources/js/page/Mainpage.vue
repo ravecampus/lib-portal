@@ -52,11 +52,13 @@
                     </ul>
 
                 </nav>
-                <div class="container h-div">
-
+                <div class="container h-div text-center">
+                        <h1>LIBRARY PORTAL OF KABACAN PILOT CENTRAL ELEMENTARY SCHOOL</h1>
+                        <h4>KABACAN, COTABATO</h4>
                     
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <div class="d-flex justify-content-center mb-4">
                        
+                       <img class="w-50" :src="'../img/logo.png'" />
                     </div>
 
                 </div>
@@ -98,9 +100,9 @@ export default {
           if(window.Laravel.isLoggedin){
                 let user = window.Laravel.user;
                 if(user.role == 2){
-                    this.$router.push({name:'admin'})
-                }else if(user.role == 1){
-                     this.$router.push({name:'user'})
+                    this.$router.push({name:'adminlibprofile'})
+                }else if(user.role == 1 || user.role == 0){
+                     this.$router.push({name:'userhome'})
                 }
             }
         
