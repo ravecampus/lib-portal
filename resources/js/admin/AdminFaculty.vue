@@ -25,10 +25,10 @@
                                         <span class="fa fa-edit"></span>
                                         Edit
                                     </button>
-                                    <button class="btn btn-sm btn-secondary" @click="deleteFaculty(list)">
+                                    <!-- <button class="btn btn-sm btn-secondary" @click="deleteFaculty(list)">
                                         <span class="fa fa-trash"></span>
                                         Delete
-                                    </button>
+                                    </button> -->
                                 </div>
                                 
                             </td>
