@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <img :src="list.image == null ? '../img/logo.png' :'../storage/gallery/'+list.image"
+                                <img :src="list.image == null ? '../img/logo.png' :'../storage/event/'+list.image"
                                     class="card-img-top"
                                     alt="Waterfall"
                                 />
