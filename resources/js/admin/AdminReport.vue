@@ -21,11 +21,15 @@
                     <div class="col-md-3">
                         <button type="button" @click="printData()" class="btn btn-success btn-sm "><i class="fa fa-print"></i> Print</button>
                     </div>
+                    <!-- <div class="col-md-3">
+                        <Datepicker v-model="post.date" placeholder="Date" :format="format"/>
+                    </div> -->
                     <div class="col-md-6">
                         <select class="form-control" v-model="tableData.filter" @change="filterData()">
                             <option value="null">Filter</option>
                             <option value="0">Student</option>
                             <option value="1">Faculty</option>
+                            <option value="2">Visitor</option>
                         </select>
                     </div>
                     
@@ -33,7 +37,7 @@
                 </div>
                 <data-table class="mt-5" :columns="columns" :sortKey="sortKey" :sortOrders="sortOrders" @sort="sortBy">
                     <tbody v-for="(list, idx) in users" :key="idx">
-                        <tr class="tr-shadow">
+                        <tr class="tr-shadow" v-if="list.logs.length > 0">
                             <td><strong>{{ list.first_name }}</strong>
                             </td>
                             <td><span>{{ list.last_name }}</span></td>
@@ -41,13 +45,14 @@
                             <td><span>{{ extractRole(list.role) }}</span></td>
                             <td><span>{{ list.email }}</span></td>
                             <td><span>{{ list.contact_number }}</span></td>
+                            <td><span class="text-success">{{ list.logs.length }}</span></td>
                       
                         </tr>
                         <tr class="spacer"></tr>
                         
                     </tbody>
                 </data-table>
-                <div class="col-md-12 d-print-none">
+                <!-- <div class="col-md-12 d-print-none">
                     <div class="pull-right">
                         <pagination :pagination="pagination"
                             @prev="listUser(pagination.prevPageUrl)"
@@ -56,7 +61,7 @@
                         </pagination>
                     </div>
                     
-                </div>
+                </div> -->
 
             </div>
 
@@ -100,6 +105,7 @@ export default {
         {label:'Role', name:null},
         {label:'Email', name:null},
         {label:'Contact Number', name:null},
+        {label:'Number of Logs', name:null},
         // {label:'Action ', name:null},
         ];
         
@@ -119,7 +125,7 @@ export default {
             btndis: false,
             tableData:{
                 draw:0,
-                length:10,
+                length:1000,
                 search:'',
                 column:0,
                 archive:0,
@@ -203,7 +209,7 @@ export default {
             window.print();
         },
         extractRole(num){
-            return num== 0 ? "Student" :num== 1 ? "Faculty" :"Admin";
+            return num== 0 ? "Student" :num == 1 ? "Faculty" :num ==2 ? "Visitor" :"Admin";
         },
         filterData(){
             this.listUser();

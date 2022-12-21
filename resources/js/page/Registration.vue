@@ -26,6 +26,17 @@
 
                                     </div>
                                 </div>
+                                 <div class="form-group">
+                                        <input type="radio" v-model="post.role" :value="0"> &nbsp;
+                                        <label>Student</label>
+                                        <input type="radio" class="ml-5" v-model="post.role" :value="1"> &nbsp;
+                                        <label >Faculty</label>
+                                         <input type="radio" class="ml-5"  v-model="post.role" :value="2"> &nbsp;
+                                        <label>Visitor</label>
+                                        <div>
+                                            <span class="errors-material" v-if="errors.role">{{errors.role[0]}}</span>
+                                        </div>
+                                </div>
                                 <div class="form-group">
                                     <input type="email" v-model="post.email" class="form-control form-control-user" id="exampleInputEmail"
                                         placeholder="Email Address">
@@ -44,6 +55,7 @@
 
                                     </div>
                                 </div>
+                               
                                 <button type="button" :disabled="btndis" @click="register()" class="btn btn-primary btn-user btn-block">
                                     {{ btn }}
                                 </button>

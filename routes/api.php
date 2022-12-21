@@ -14,6 +14,7 @@ use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +47,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('faculty', FacultyController::class);
     Route::resource('user', UserController::class);
     Route::resource('comment', CommentController::class);
+    Route::resource('event', EventController::class);
     Route::post('user-account', [UserController::class,'setAccount']);
+    Route::post('event-upload', [EventController::class, 'eventUpload']);
 
     Route::post('change-password', [AuthController::class,'changePassword']);
     Route::post('update-profile', [AuthController::class,'updateProfile']);

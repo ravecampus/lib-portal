@@ -18,10 +18,10 @@
                                     <span class="fa fa-edit"></span>
                                     Edit
                                 </button>
-                                <button class="btn btn-sm btn-secondary" @click="deleteJournal(list)">
+                                <!-- <button class="btn btn-sm btn-secondary" @click="deleteJournal(list)">
                                     <span class="fa fa-trash"></span>
                                     Delete
-                                </button>
+                                </button> -->
                             </div>
                             
                         </td>

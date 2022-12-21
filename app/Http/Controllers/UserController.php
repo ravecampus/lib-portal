@@ -22,7 +22,7 @@ class UserController extends Controller
         $filter = $request->filter;
         $searchValue = $request->search;
         
-        $query = User::where("role", 2)->orderBy($columns[$column], $dir);
+        $query = User::where("role", 3)->orderBy($columns[$column], $dir);
        
             
         if($searchValue){
@@ -64,7 +64,7 @@ class UserController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'contact_number' => $request->contact_number,
-            'role' => 2,
+            'role' => 3,
         ]);
 
         return response()->json($book, 200);
@@ -152,10 +152,10 @@ class UserController extends Controller
         $searchValue = $request->search;
         
         if(is_null($filter)){
-            $query = User::where("role","!=", 2)->orderBy($columns[$column], $dir);
+            $query = User::with('logs')->where("role","!=", 3)->orderBy($columns[$column], $dir);
 
         }else{
-            $query = User::where("role","!=", 2)->where('role', $filter)->orderBy($columns[$column], $dir);
+            $query = User::with('logs')->where("role","!=", 3)->where('role', $filter)->orderBy($columns[$column], $dir);
 
         }
        

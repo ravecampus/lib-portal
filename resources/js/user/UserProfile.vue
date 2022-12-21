@@ -51,6 +51,7 @@
                         <select class="form-control" v-model="post.role">
                             <option value="0">Student</option>
                             <option value="1">Faculty</option>
+                            <option value="2">Visitors</option>
                         </select>
                         <span class="errors-material" v-if="errors.role">{{errors.role[0]}}</span>
                     </div>

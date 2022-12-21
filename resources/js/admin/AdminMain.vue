@@ -16,11 +16,12 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <!-- <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item active">
+                <router-link class="nav-link" :to="{name:'admindashboard'}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li> -->
+                    <span>Dashboard</span>
+                </router-link>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -35,11 +36,11 @@
                     <i class="fas fa-school"></i>
                 <span>Lib. Profile</span></router-link>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <router-link class="nav-link" :to="{name:'adminfaculty'}">
                     <i class="fas fa-users"></i>
                 <span>Faculty</span></router-link>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <router-link class="nav-link" :to="{name :'admincollection'}">
                     <i class="fas fa-clipboard"></i>
@@ -66,7 +67,7 @@
             <hr class="sidebar-divider d-none d-md-block">
             <li class="nav-item">
                 <router-link class="nav-link" :to="{name:'adminreport'}">
-                    <i class="fas fa-users"></i>
+                    <i class="fas fa-file"></i>
                 <span>Report</span></router-link>
             </li>
             <li class="nav-item">
@@ -194,6 +195,7 @@ export default {
             message:'',
             status:0,
             user:{},
+            title:"",
         }
     },
     methods: {

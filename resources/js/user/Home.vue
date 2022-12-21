@@ -4,11 +4,11 @@
             <div class="card shadow-sm mt-5">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-8 p-5">
+                        <div class="col-md-12 p-5">
                             <h5 class="text-center mb-3">School History</h5>
                             {{profile.school_history}}
                         </div>
-                        <div class="col-md-4 p-5">
+                        <!-- <div class="col-md-4 p-5">
                             <ul class="list-group shadow ">
                                 <li class="list-group-item">
                                     <h5 class="text-center mb-3"><strong>Faculties</strong></h5>
@@ -27,7 +27,7 @@
                                     </div>  
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>

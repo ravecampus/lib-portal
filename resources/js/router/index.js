@@ -14,6 +14,7 @@ import Services from '../admin/AdminService';
 import Faculty from '../admin/AdminFaculty';
 import User from '../admin/AdminUser';
 import Report from '../admin/AdminReport';
+import Dashboard from '../admin/AdminDashboard';
 
 import UserMain from '../user/Dashboard';
 import UserProfile from '../user/UserProfile';
@@ -25,6 +26,7 @@ import UserLinkage from '../user/UserLinkage';
 import UserService from '../user/UserService';
 import UserGallery from '../user/UserGallery';
 import UserContact from '../user/UserContact';
+import UserDash from '../user/Dash';
 
 
 export const routes = [
@@ -57,8 +59,13 @@ export const routes = [
             },
             {
                 name: 'userhome',
-                path: '',
+                path: 'about',
                 component: UserHome
+            },
+            {
+                name: 'userdashboard',
+                path: '',
+                component: UserDash
             },
             {
                 name: 'userbook',
@@ -103,8 +110,13 @@ export const routes = [
         component: Admin,
         children:[
             {
-                name: 'adminlibprofile',
+                name: 'admindashboard',
                 path: '',
+                component: Dashboard
+            },
+            {
+                name: 'adminlibprofile',
+                path: 'profile',
                 component: AdminLibProfile
             },
             {
@@ -189,6 +201,7 @@ const userRoutes = [
     'userservice',
     'usergallery',
     'usercontact',
+    'userdashboard'
    
    
 ];
@@ -205,7 +218,7 @@ const adminRoutes = [
     'adminfaculty',
     'adminuser',
     'adminreport',
-    
+    'admindashboard',   
 ];
 
 
@@ -216,9 +229,9 @@ router.beforeEach((to, from, next)=>{
         }
     }else{
         let user = window.Laravel.user;
-        if(adminRoutes.includes(to.name) && user.role == 2){
+        if(adminRoutes.includes(to.name) && user.role == 3){
             return next();
-        }else if(userRoutes.includes(to.name) && (user.role == 1 || user.role == 0)){
+        }else if(userRoutes.includes(to.name) && (user.role == 1 || user.role == 0 || user.role == 2)){
             return next();
         }
     }

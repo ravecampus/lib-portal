@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserLog;
 use Session;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -14,6 +16,7 @@ class AuthController extends Controller
         $request->validate([
             'first_name' => 'required|string',
             'last_name' => 'required|string',
+            'role' => 'required',
             'email' => 'required|string|email|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -22,7 +25,7 @@ class AuthController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
-            'role' => 0,
+            'role' => $request->role,
             'password' => bcrypt($request->password)
         ]);
 
@@ -47,6 +50,13 @@ class AuthController extends Controller
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
 
         $a = Auth::user();
+        if($a->role == 0 || $a->role == 1 || $a->role == 2){
+            UserLog::create([
+                'user_id' => $a->id,
+                'log' => 1,
+                'date' => Carbon::now()->format('Y-m-d'),
+            ]);
+        }
         return response()->json($a,200);
     }
 

@@ -22,6 +22,11 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto user">
                         <li class="nav-item dropdown no-arrow">
+                            <router-link class="nav-link" :to="{name:'userdashboard'}">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600">Dashboard</span>
+                            </router-link>
+                        </li>
+                        <li class="nav-item dropdown no-arrow">
                             <router-link class="nav-link" :to="{name:'userhome'}">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600">About</span>
                             </router-link>

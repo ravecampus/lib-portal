@@ -99,10 +99,10 @@ export default {
 
           if(window.Laravel.isLoggedin){
                 let user = window.Laravel.user;
-                if(user.role == 2){
-                    this.$router.push({name:'adminlibprofile'})
-                }else if(user.role == 1 || user.role == 0){
-                     this.$router.push({name:'userhome'})
+                if(user.role == 3){
+                    this.$router.push({name:'admindashboard'})
+                }else if(user.role == 1 || user.role == 0 || user.role == 2){
+                     this.$router.push({name:'userdashboard'})
                 }
             }
         
