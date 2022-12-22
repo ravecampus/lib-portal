@@ -52,15 +52,15 @@
                         <div class="row">
                             <div class="col-md-12">
                             <div class="form-group">
-                                <textarea class="form-control" v-model="message.reply" rows="5" placeholder="Message..."></textarea>
-                                <span class="errors-material" v-if="errors.message">{{errors.message[0]}}</span>
+                                <textarea class="form-control" v-model="message.message_" rows="5" placeholder="Message..."></textarea>
+                                <span class="errors-material" v-if="errors.message_">{{errors.message_[0]}}</span>
                             </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer text-center">
                         <div class="btn-group">
-                            <button type="button" @click="replyPost(post)" class="btn btn-primary">Send</button>
+                            <button type="button" @click="replyPost(message)" class="btn btn-primary">Send</button>
                             
                         </div>
                     </div>
@@ -127,9 +127,9 @@ export default {
             this.message = data;
             $('.reply').modal('show');
         },
-        replyPost(){
+        replyPost(message){
             this.$axios.get("sactum/cookie-csrf").then(response=>{
-                    this.$axios.post("api/reply", this.message).then(res=>{
+                    this.$axios.post("api/reply", message).then(res=>{
                         this.$emit('show',{'message':'Reply has been sent!', 'status':4});
                         this.errors = [];
                         this.message = {};

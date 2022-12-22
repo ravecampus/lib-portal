@@ -37,10 +37,10 @@ class ReplyController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'message'=>'required|string'
+            'message_'=>'required|string'
         ]);
         $rep = Reply::create([
-            'message'=>$request->message,
+            'message'=>$request->message_,
             'comment_id'=>$request->id,
             'user_id'=>Auth::id(),
         ]);
