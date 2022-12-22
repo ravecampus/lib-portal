@@ -23,6 +23,46 @@
                     <div class="card-body">
                          <img class="img-thumbnail logo-sc mr-2" :src="'../img/logo.png'" />
                         <strong>{{ list.first_name }},  {{ list.last_name }}</strong> : {{ list.message }} <small> ({{ formatDate(list.created_at) }})</small>
+                        <div class="small">
+                            <a href="#" @click="reply(list)">Reply</a>
+                        </div>
+                         <div>
+                            <li class="list-group"  v-for="(lst,idx) in list.replies" :key="idx">
+                                <div class="card mt-1 shadow-sm">
+                                    <div class="card-body">
+                                    <div>
+                                        <strong>{{ extractUser(lst.user_id) }}</strong>
+                                    </div>
+                                     {{ lst.message }} <small> ({{ formatDate(lst.created_at) }})</small>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="modal fade reply">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h6>Reply to <strong>{{ this.message.first_name }}</strong></h6>
+                </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea class="form-control" v-model="message.reply" rows="5" placeholder="Message..."></textarea>
+                                <span class="errors-material" v-if="errors.message">{{errors.message[0]}}</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <div class="btn-group">
+                            <button type="button" @click="replyPost(post)" class="btn btn-primary">Send</button>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,6 +74,8 @@
 export default {
     data(){
         return{
+            message:{},
+            users:[],
             post:{},
             btncap:"Send",
             errors:[],
@@ -74,10 +116,44 @@ export default {
             const year =  d.getFullYear();
             return  month+ "-" + day  + "-" + year;
         },
+        listUser(){
+            this.$axios.get("sactum/cookie-csrf").then(response=>{
+                this.$axios.get("api/user-list").then(res=>{
+                    this.users = res.data;
+                });
+            });
+        },
+        reply(data){
+            this.message = data;
+            $('.reply').modal('show');
+        },
+        replyPost(){
+            this.$axios.get("sactum/cookie-csrf").then(response=>{
+                    this.$axios.post("api/reply", this.message).then(res=>{
+                        this.$emit('show',{'message':'Reply has been sent!', 'status':4});
+                        this.errors = [];
+                        this.message = {};
+                        this. listComment();
+                        $('.reply').modal('hide');
+                    }).catch(err=>{
+                        this.errors = err.response.data.errors
+                    });
+                });
+        },
+        extractUser(id){
+            let ret = "";
+            this.users.forEach(val => {
+                if(id == val.id){
+                    ret = val.first_name+" "+val.last_name;
+                }
+            });
+            return ret;
+        }
            
     },
     mounted(){
         this.listComment();
+        this.listUser();
     }
 }
 </script>

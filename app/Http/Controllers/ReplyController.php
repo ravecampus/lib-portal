@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Comment;
+use App\Models\Reply;
 use Illuminate\Support\Facades\Auth;
 
-class CommentController extends Controller
+class ReplyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $query = Comment::with('replies')->select('comment.*','users.first_name', 'users.last_name')
-        ->join('users', 'users.id', '=', 'comment.user_id')
-        ->orderBy('comment.created_at', 'desc');
-        return response()->json($query->get(), 200);
+        //
     }
 
     /**
@@ -40,15 +37,15 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'message' => 'required|string'
+            'message'=>'required|string'
+        ]);
+        $rep = Reply::create([
+            'message'=>$request->message,
+            'comment_id'=>$request->id,
+            'user_id'=>Auth::id(),
         ]);
 
-        $message = Comment::create([
-            'user_id' => Auth::id(),
-            'message' => $request->message
-        ]);
-
-        return response()->json($message, 200);
+        return response()->json($rep, 200);
     }
 
     /**
@@ -59,7 +56,7 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**

@@ -8,8 +8,9 @@
                     class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
         </div>
 
-        <div class="row card">
-            <div class="col-md-12 card-body">
+        <div class="row">
+            <div class="col-md-7 card">
+                <div class="card-body">
                 <h4>Events</h4>
                 <hr>
                 <button type="button" @click="showAddModal()" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> ADD</button>
@@ -53,7 +54,33 @@
                     </div>
                     
                 </div>
-
+            </div>
+            </div>
+            <div class="col-md-5 row card card-body">
+                <div class="col-md-12 card-body">
+                    <h6>Comment / Suggestion</h6>
+                   <div class="card card-sm mt-1 shadow-sm" v-for="(list,indx) in comments" :key="indx">
+                    <div class="card-body">
+                         <img class="img-thumbnail logo-sc mr-2" :src="'../img/logo.png'" />
+                        <strong>{{ list.first_name }},  {{ list.last_name }}</strong> : {{ list.message }} <small> ({{ formatDate(list.created_at) }})</small>
+                        <div class="small">
+                            <a href="#" @click="reply(list)">Reply</a>
+                        </div>
+                        <div>
+                            <li class="list-group"  v-for="(lst,idx) in list.replies" :key="idx">
+                                <div class="card mt-1 shadow-sm">
+                                    <div class="card-body">
+                                    <div>
+                                        <strong>{{ extractUser(lst.user_id) }}</strong>
+                                    </div>
+                                     {{ lst.message }} <small> ({{ formatDate(lst.created_at) }})</small>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>    
+                    </div>
+                </div>
+                </div>
             </div>
 
             <div class="modal fade event" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
@@ -138,6 +165,32 @@
                     </div>
                 </div>
             </div>
+        <div class="modal fade reply">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h6>Reply to <strong>{{ this.message.first_name }}</strong></h6>
+                </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea class="form-control" v-model="message.reply" rows="5" placeholder="Message..."></textarea>
+                                <span class="errors-material" v-if="errors.message">{{errors.message[0]}}</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <div class="btn-group">
+                            <button type="button" @click="replyPost(post)" class="btn btn-primary">Send</button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         </div>
 </div>
@@ -183,6 +236,9 @@ export default {
         });
 
         return{
+            users:[],
+            comments:[],
+            message:{},
             upload:{},
             btncap:"Save",
             errors:[],
@@ -351,10 +407,52 @@ export default {
                 });
             });
         
+        },
+         listComment(){
+            this.$axios.get("sactum/cookie-csrf").then(response=>{
+                this.$axios.get("api/comment").then(res=>{
+                    this.comments = res.data;
+                });
+            });
+        },
+        listUser(){
+            this.$axios.get("sactum/cookie-csrf").then(response=>{
+                this.$axios.get("api/user-list").then(res=>{
+                    this.users = res.data;
+                });
+            });
+        },
+        reply(data){
+            this.message = data;
+            $('.reply').modal('show');
+        },
+        replyPost(){
+            this.$axios.get("sactum/cookie-csrf").then(response=>{
+                    this.$axios.post("api/reply", this.message).then(res=>{
+                        this.$emit('show',{'message':'Reply has been sent!', 'status':4});
+                        this.errors = [];
+                        this.message = {};
+                        this. listComment();
+                        $('.reply').modal('hide');
+                    }).catch(err=>{
+                        this.errors = err.response.data.errors
+                    });
+                });
+        },
+        extractUser(id){
+            let ret = "";
+            this.users.forEach(val => {
+                if(id == val.id){
+                    ret = val.first_name+" "+val.last_name;
+                }
+            });
+            return ret;
         }
     },
     mounted() {
         this.listEvent();
+        this.listComment();
+        this.listUser();
     },
 }
 </script>

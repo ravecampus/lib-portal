@@ -170,4 +170,9 @@ class UserController extends Controller
         $projects = $query->paginate($length);
         return ['data'=>$projects, 'draw'=> $request->draw];
     }
+
+    public function userList(){
+        $user = User::all();
+        return response()->json($user, 200);
+    }
 }

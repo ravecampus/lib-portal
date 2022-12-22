@@ -15,6 +15,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ReplyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,12 +49,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('comment', CommentController::class);
     Route::resource('event', EventController::class);
+    Route::resource('reply', ReplyController::class);
     Route::post('user-account', [UserController::class,'setAccount']);
     Route::post('event-upload', [EventController::class, 'eventUpload']);
 
     Route::post('change-password', [AuthController::class,'changePassword']);
     Route::post('update-profile', [AuthController::class,'updateProfile']);
     Route::get('report', [UserController::class,'reportUser']);
+    Route::get('user-list', [UserController::class,'userList']);
 });
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
