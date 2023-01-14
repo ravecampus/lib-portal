@@ -75,7 +75,7 @@
                         </li>
                          <li class="nav-item dropdown no-arrow">
                             <router-link class="nav-link" :to="{name:'usercontact'}">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600">Contact</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600">FAQ</span>
                             </router-link>
                         </li>
          

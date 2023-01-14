@@ -27343,7 +27343,7 @@ var _hoisted_23 = {
 };
 var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "mr-2 d-none d-lg-inline text-gray-600"
-}, "Contact", -1 /* HOISTED */);
+}, "FAQ", -1 /* HOISTED */);
 var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "topbar-divider d-none d-sm-block"
 }, null, -1 /* HOISTED */);
@@ -28652,7 +28652,7 @@ var routes = [{
     component: _user_UserGallery__WEBPACK_IMPORTED_MODULE_24__["default"]
   }, {
     name: 'usercontact',
-    path: 'contact',
+    path: 'FAQ',
     component: _user_UserContact__WEBPACK_IMPORTED_MODULE_25__["default"]
   }]
 }, {

@@ -99,7 +99,7 @@ export const routes = [
             },
             {
                 name: 'usercontact',
-                path: 'contact',
+                path: 'FAQ',
                 component: UserContact
             },
         ]

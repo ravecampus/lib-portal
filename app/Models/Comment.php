@@ -14,6 +14,6 @@ class Comment extends Model
     
     public function replies()
     {
-        return $this->hasMany(Reply::class, 'comment_id', 'id')->orderBy('created_at','desc');
+        return $this->hasMany(Reply::class, 'comment_id', 'id')->with('user')->orderBy('created_at','desc');
     }
 }
